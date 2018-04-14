@@ -1,4 +1,6 @@
 '''
+Programmers: Rocio Salguero
+
 
 References:
     https://www.kaggle.com/startupsci/titanic-data-science-solutions
@@ -23,7 +25,8 @@ def bar_chart(feature):
     df.plot(kind='bar',stacked=True, figsize=(10,5))
     plt.show()
 
-''' Retrieve and Fix data '''
+
+'''  Retrieve and Fix data  '''
 original = pd.read_csv('Dataset.csv', header=None, index_col=None)
 original.columns = ['Age', 'Work', 'Edu-Lvl', 'Edu-Years', 'Marriage-Status', 'Occupation', 'Relationship', 'Gender',
                     'Cap-Gain', 'Cap-Loss', 'Hours', 'Income']
@@ -41,8 +44,11 @@ original.replace(" >50K", 1, inplace=True)
 # creating new column instead of replace
 # original["Income_cleaned"]=original["Income"].astype('category')
 # original["Income_cleaned"]=original["Income_cleaned"].cat.codes
+
 # # Drop null values
-original.dropna()
+# original.dropna()
+original = original[pd.notnull(original['Work'])]
+original = original[pd.notnull(original['Occupation'])]
 
 
 ''' Certain Columns can be grouped into ranges for easier analysis 
@@ -74,7 +80,7 @@ original.loc[original.Hours > 80, 'Hours'] = 4
 
 
 ''' Analyze Data '''
-print(original.head(10))
+print(original.head(20))
 # print(original.columns.values)
 # print("Data shape", original.shape)
 
@@ -98,11 +104,23 @@ print(original.head(10))
 # print(original[['Hours', 'Income']].groupby(['Hours'], as_index=False).mean().sort_values(by='Income', ascending=False) )
 
 # Bar chart distributions
-bar_chart('Edu-Years')
-bar_chart('Age')
-
+# bar_chart('Work')
+# bar_chart('Edu-Lvl')
+# bar_chart('Marriage-Status')
+# bar_chart('Occupation')
+# bar_chart('Relationship')
+# bar_chart('Gender')
+# bar_chart('Age')
+# bar_chart('Edu-Years')
+# bar_chart('Cap-Gain')
+# bar_chart('Cap-Loss')
+# bar_chart('Hours')
 
 ''' Convert Category Columns to numerical '''
+# See the categorical unique values
+# print(original.Work.unique(), '\n', original['Edu-Lvl'].unique(), '\n', original['Marriage-Status'].unique())
+# print(original.Occupation.unique(), '\n', original.Relationship.unique(), '\n', original.Gender.unique())
+
 original["Work"]=original["Work"].astype('category')
 original["Work"]=original["Work"].cat.codes
 
@@ -120,6 +138,9 @@ original["Relationship"]=original["Relationship"].cat.codes
 
 original["Gender"]=original["Gender"].astype('category')
 original["Gender"]=original["Gender"].cat.codes
+# See the numerical categorical values
+# print(original.Work.unique(), '\n', original['Edu-Lvl'].unique(), '\n', original['Marriage-Status'].unique())
+# print(original.Occupation.unique(), '\n', original.Relationship.unique(), '\n', original.Gender.unique())
 # print(original.head(10))
 
 
