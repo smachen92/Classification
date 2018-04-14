@@ -24,6 +24,7 @@ def bar_chart(feature):
     df = pd.DataFrame([survived,dead])
     df.index = ['>50','<=50']
     df.plot(kind='bar',stacked=True, figsize=(10,5))
+    plt.title(feature)
     plt.show()
 
 
