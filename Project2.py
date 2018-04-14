@@ -1,6 +1,7 @@
 '''
 Programmers: Rocio Salguero
-
+             Andy Nygen
+             Annie Chen
 
 References:
     https://www.kaggle.com/startupsci/titanic-data-science-solutions
